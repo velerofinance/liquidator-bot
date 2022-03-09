@@ -13,6 +13,7 @@ load_dotenv(BASE_DIR / ".env", override=False)
 AUCTIONEER_PK = os.environ["AUCTIONEER_PK"]
 
 IS_DEBUG = bool(strtobool(os.environ.get("IS_DEBUG", "False")))
+IS_ONLY_NOTIFICATOR = bool(strtobool(os.environ.get("IS_ONLY_NOTIFICATOR", "False")))
 
 RPC_URL = URI(os.environ.get("RPC_URL", "https://evmexplorer.velas.com/rpc"))
 EXTERNAL_BLOCK_EXPLORER_URL = os.environ.get("EXTERNAL_BLOCK_EXPLORER_URL", "https://evmexplorer.velas.com/api")
