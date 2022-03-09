@@ -1,0 +1,7 @@
+-e git+https://github.com/captain13128/telegram-log-handler.git#egg=telegram_log_handler
+-e git+https://github.com/velerofinance/velero-bot-sdk.git#egg=velero_bot_sdk
+
+web3~=5.28.0
+celery~=5.2.3
+requests~=2.27.1
+python-dotenv~=0.19.2

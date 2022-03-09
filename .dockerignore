@@ -1,0 +1,23 @@
+*.swp
+*.pyc*
+*.orig*
+*.yaml*
+*.backup*
+.idea/
+.DS_Store/
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+output/
+tags
+env.bak/
+venv.bak/
+logs/*
+log/
+
+README.md
+sandbox.py
