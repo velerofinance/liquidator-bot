@@ -30,6 +30,8 @@ class AuctionItem:
             self.swap_path = [wagyu._wrapped_coin_addr, dss.get_contact_address("WAG"), dss.usdv.address]
         elif self.coin == "WAG":
             self.swap_path = [dss.get_contact_address("WAG"), dss.usdv.address]
+        elif self.coin == "WBTC":
+            self.swap_path = [dss.get_contact_address("WBTC"), dss.usdv.address]
         else:
             raise ValueError("Not supported coin")
 
