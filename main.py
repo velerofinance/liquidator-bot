@@ -35,7 +35,7 @@ class BotLiquidator:
         self.dss = DssContractsConnector(http_rpc_url=config.RPC_URL, abi_dir=VELERO_DEFAULT_ABI_DIR,
                                          chain_log_addr=config.CHAIN_LOG_ADDRESS,
                                          external_block_explorer_url=config.EXTERNAL_BLOCK_EXPLORER_URL,
-                                         account=account, rpc_timeout=5)
+                                         account=account, rpc_timeout=10)
         self.viewer = Viewer(queue=self.unsafe_vaults_queue, dss=self.dss)
         self.logger.info(f"Initialization Wagyu")
 
@@ -45,10 +45,10 @@ class BotLiquidator:
                                                 multicall_addr=self.dss.multicall.address,
                                                 slippage=config.WAGYU_SLIPPAGE,
                                                 external_block_explorer_url=config.EXTERNAL_BLOCK_EXPLORER_URL,
-                                                account=account, rpc_timeout=5)
+                                                account=account, rpc_timeout=10)
 
-            self.liquidator = Liquidator(queue=self.unsafe_vaults_queue, dss=self.dss,
-                                         wagyu=self.wagyu, percent_price_delta=config.PERCENT_PRICE_DELTA)
+            self.liquidator = Liquidator(queue=self.unsafe_vaults_queue, dss=self.dss, wagyu=self.wagyu,
+                                         percent_price_delta=config.PERCENT_PRICE_DELTA, make_payback=config.MAKE_PAYBACK)
 
     def start(self):
         self._viewer_thread = threading.Thread(target=self.viewer.start, name="viewer_thread")

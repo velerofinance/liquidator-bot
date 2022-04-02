@@ -19,7 +19,7 @@ class Liquidator:
     alive: bool = False
 
     def __init__(self, queue: Queue, dss: DssContractsConnector,
-                 wagyu: WagyuContractConnector, percent_price_delta: Decimal):
+                 wagyu: WagyuContractConnector, percent_price_delta: Decimal, make_payback: bool):
         self.dss = dss
         self.setup_liquidations_queue = queue
         self.tasks = []
@@ -30,6 +30,8 @@ class Liquidator:
         self.payback_queue = Queue()
         self.exit_queue = Queue()
         self.join_queue = Queue()
+
+        self.make_payback = make_payback
 
         self.liquidations_threads_count = 5
 
@@ -48,8 +50,10 @@ class Liquidator:
                 threads.append(threading.Thread(target=self.setup_new_liquidation, name="thread_setup_new_auctions"))
                 threads.append(threading.Thread(target=self.check_active_auctions, name="thread_check_active_auctions"))
                 threads.append(threading.Thread(target=self.processed_exit, name="thread_process_exits"))
-                threads.append(threading.Thread(target=self.processed_payback, name="thread_process_payback"))
-                threads.append(threading.Thread(target=self.processed_joined, name="thread_processed_joined"))
+
+                if self.make_payback is True:
+                    threads.append(threading.Thread(target=self.processed_payback, name="thread_process_payback"))
+                    threads.append(threading.Thread(target=self.processed_joined, name="thread_processed_joined"))
 
                 for i in range(self.liquidations_threads_count):
                     threads.append(threading.Thread(
