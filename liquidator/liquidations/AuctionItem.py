@@ -27,7 +27,7 @@ class AuctionItem:
         self.percent_price_delta = percent_price_delta
 
         if self.coin == "VLX":
-            self.swap_path = [wagyu._wrapped_coin_addr, dss.get_contact_address("WAG"), dss.usdv.address]
+            self.swap_path = [wagyu._wrapped_coin_addr, "0xc111c29A988AE0C0087D97b33C6E6766808A3BD3", dss.usdv.address]
         elif self.coin == "WAG":
             self.swap_path = [dss.get_contact_address("WAG"), dss.usdv.address]
         elif self.coin == "WBTC":

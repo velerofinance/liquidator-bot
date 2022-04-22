@@ -18,6 +18,7 @@ env.bak/
 venv.bak/
 logs/*
 log/
+sandbox/
 
 README.md
 sandbox.py
